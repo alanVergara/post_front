@@ -1,23 +1,24 @@
-import logo from './logo.svg';
 import './App.css';
+import { useEffect } from 'react';
+import { getPosts } from './services/posts'
+import { useDispatch } from 'react-redux';
+import { TablePosts } from './components/table'
+import { NewItem } from './components/new_item'
+import { FilterByName } from './components/filter'
 
 function App() {
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getPosts());
+  }, [dispatch]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className='m-4'>
+      <FilterByName/>
+      <TablePosts />
+      <NewItem/>
     </div>
   );
 }
